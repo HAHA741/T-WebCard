@@ -1,0 +1,18 @@
+.header {
+  backdrop-filter: blur(10px); /* 毛玻璃效果 */
+  background: rgba(255, 255, 255, 0.7); /* 半透明背景 */
+  //   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+  //   border-radius: 20px; /* iOS 圆角 */
+  padding: 20px;
+  text-align: center;
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+  }
+  .description {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6); /* 低调的灰色文本 */
+    margin-top: 5px;
+  }
+}

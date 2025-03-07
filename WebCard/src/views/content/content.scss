@@ -1,0 +1,75 @@
+.content_back {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.content_box {
+  width: 1000px;
+  min-height: 800px;
+  display: flex;
+  padding: 20px;
+  //   align-items: center;
+  background: rgba(255, 255, 255, 0.8); /* 半透明背景，模拟毛玻璃效果 */
+  backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+  border-radius: 16px; /* iOS 风格的圆角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 柔和的阴影 */
+
+  margin: auto;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* 轻微的边框增加层次感 */
+  overflow: hidden;
+  //   justify-content: center;
+}
+.left_column {
+  width: 50%;
+}
+.right_column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card_box {
+  display: flex;
+  padding: 20px;
+  //   align-items: center;
+  background: rgba(255, 255, 255, 0.8); /* 半透明背景，模拟毛玻璃效果 */
+  backdrop-filter: blur(10px); /* 毛玻璃模糊效果 */
+  border-radius: 16px; /* iOS 风格的圆角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 柔和的阴影 */
+  padding: 16px;
+  max-width: 400px;
+  //   margin: auto;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* 轻微的边框增加层次感 */
+  overflow: hidden;
+  .card_title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+  .card_description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  .left_card {
+    width: 300px;
+  }
+  .right_card {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+}
+.btn_line {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
