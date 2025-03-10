@@ -1,17 +1,17 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
+import "./qrcode.scss";
 const Qrcode = forwardRef((props, ref) => {
   const [data, setData] = useState({
     value: "https://www.baidu.com",
     template: "",
     "background-color": "#ffffff",
-    "foreground-color": "#000000;",
+    "foreground-color": "#000000",
     "inner-color": "#000000",
     "outer-color": "#000000",
-    "background-image": "",
-    "foreground-image": "",
+
     logo: "",
-    width: "100",
-    height: "100",
+    width: "120",
+    height: "120",
   });
 
   useImperativeHandle(ref, () => ({
@@ -22,19 +22,19 @@ const Qrcode = forwardRef((props, ref) => {
     getData: () => data,
   }));
   return (
-    <widget-qrcode
-      value={data.value}
-      template={data.template}
-      background-color={data["background-color"]}
-      foreground-color={data["foreground-color"]}
-      inner-color={data["inner-color"]}
-      outer-color={data["outer-color"]}
-      background-image={data["background-image"]}
-      foreground-image={data["foreground-image"]}
-      logo={data.logo}
-      width={data.width}
-      height={data.height}
-    ></widget-qrcode>
+    <div className="qrcode_box">
+      <widget-qrcode
+        value={data.value}
+        template={data.template}
+        background-color={data["background-color"]}
+        foreground-color={data["foreground-color"]}
+        inner-color={data["inner-color"]}
+        outer-color={data["outer-color"]}
+        logo={data.logo}
+        width={data.width}
+        height={data.height}
+      ></widget-qrcode>
+    </div>
   );
 });
 

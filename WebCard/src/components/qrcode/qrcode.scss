@@ -1,0 +1,19 @@
+.color_btn {
+  width: 50px;
+  height: 27px;
+  border: solid 1px #000;
+}
+.color_poi {
+  width: 130px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.qrcode_box {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+}

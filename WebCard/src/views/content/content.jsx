@@ -1,13 +1,16 @@
-import { Form, Input, Button, Collapse } from "antd";
+import { Form, Input, Button, Collapse, Radio } from "antd";
 const { TextArea } = Input;
 import Qrcode from "@/components/qrcode/qrcode";
 import { useRef, useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import "./content.scss";
 import QrOptions from "@/components/qrcode/qrOptions";
+import ContentOptions from "@/components/contentOptions/contentOptions";
+
 function Content() {
   const qrRef = useRef(null);
   const qrFormRef = useRef(null);
+  const conOptionsRef = useRef(null);
   const setCode = (val, name) => {
     qrRef.current?.setCode(name, val);
     setForm(val, name);
@@ -19,7 +22,8 @@ function Content() {
   });
 
   useEffect(() => {
-    setFormData(qrRef.current.getData());
+    let _formData = { ...formData, ...qrRef.current.getData() };
+    setFormData(_formData);
   }, []);
 
   useEffect(() => {
@@ -43,6 +47,14 @@ function Content() {
       };
     });
   }
+  //卡片颜色
+  const [cardColor, setCardColor] = useState({
+    backgroundColor: "#FFFFFF",
+    color: "#333",
+  });
+  function onCardColorChange(color) {
+    setCardColor(color);
+  }
 
   const colList = [
     {
@@ -52,13 +64,16 @@ function Content() {
         <QrOptions
           ref={qrFormRef}
           onQrFormDataChange={handleQrFormDataChange}
+          onColorChange={onColorChange}
         />
       ),
     },
     {
       key: "2",
       label: "卡片配置",
-      children: <p>卡片配置</p>,
+      children: (
+        <ContentOptions ref={conOptionsRef} onColorChange={onCardColorChange} />
+      ),
     },
   ];
 
@@ -66,6 +81,52 @@ function Content() {
     console.log("变化");
     qrRef.current.setCode("template", newData.template);
     // setCode(newData, "template");
+  }
+  function onColorChange(coloroptions) {
+    for (let key in coloroptions) {
+      qrRef.current.setCode(key, coloroptions[key]);
+    }
+  }
+  const [temList, setTemList] = useState([
+    {
+      label: "模板1",
+      val: {
+        content: ["#FFFFFF", "#333"],
+        qrcode: ["#FFFFFF", "#000000", "#000000", "#000000"],
+      },
+    },
+    {
+      label: "模板2",
+      val: {
+        content: ["#1E1E2F", "#FFFFFF"],
+        qrcode: ["#F8F9FA", "#0D6EFD", "#0D6EFD", "#0D6EFD"],
+      },
+    },
+    {
+      label: "模板3",
+      val: {
+        content: ["#FAE3D9", "#5D4037"],
+        qrcode: ["#FFFFFF", "#D84315", "#D84315", "#D84315"],
+      },
+    },
+    {
+      label: "模板4",
+      val: {
+        content: ["#D4E157", "#33691E"],
+        qrcode: ["#FFFFFF", "#8BC34A", "#8BC34A", "#8BC34A"],
+      },
+    },
+  ]);
+  function changeTem(val) {
+    // debugger;
+    qrFormRef.current.setAllColor(val.qrcode);
+    let keys = Object.keys(cardColor);
+    let _cardColor = { ...cardColor };
+    val.content.forEach((con, index) => {
+      let key = keys[index];
+      _cardColor[key] = con;
+    });
+    setCardColor(_cardColor);
   }
 
   return (
@@ -92,11 +153,24 @@ function Content() {
                   rows="5"
                 />
               </Form.Item>
+              <Form.Item label="模板" name="title">
+                <Radio.Group onChange={(e) => changeTem(e.target.value)}>
+                  {temList.map((tem) => (
+                    <Radio value={tem.val} key={tem.label}>
+                      {tem.label}
+                    </Radio>
+                  ))}
+                </Radio.Group>
+              </Form.Item>
             </Form>
             <Collapse defaultActiveKey={["1"]} ghost items={colList} />
           </div>
           <div className="right_column">
-            <div className="card_box" id="generate_card">
+            <div
+              className="card_box"
+              id="generate_card"
+              style={{ ...cardColor }}
+            >
               <div className="left_card">
                 <div className="card_title">{formData.title}</div>
                 <div className="card_description">{formData.description}</div>
